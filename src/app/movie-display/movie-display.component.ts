@@ -13,7 +13,7 @@ import {MoviesService} from '../shared/movies.service';
   
 })
 export class MovieDisplayComponent {
-    selectedMovie : Movie;
+    movie : Movie;
     private movieIndex : number;
     private subscription : Subscription;
     constructor(private moviesService: MoviesService, private router: Router, private activatedroute: ActivatedRoute  ){}
@@ -22,7 +22,7 @@ export class MovieDisplayComponent {
      this.subscription = this.activatedroute.params.subscribe(
       (params:any) => {
         this.movieIndex = params['id'];
-        this.selectedMovie = this.moviesService.getMovie(this.movieIndex);
+        this.movie = this.moviesService.getMovie(this.movieIndex);
       }
      );     
     }
