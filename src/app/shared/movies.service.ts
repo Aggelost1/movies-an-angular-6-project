@@ -6,10 +6,11 @@ import {Movie} from './movie';
 @Injectable()
 export class MoviesService{
     //will be needed later when i will update my list 
-    movieChanged = new EventEmitter<Movie[]>();
+    moviesChanged = new EventEmitter<Movie[]>();
 
     constructor(private http : HttpClient) {}
 
+    //just a placeholder untill I import and write to a .json (or from an api later on)
     private movies : Movie[] = [
         new Movie(
             "Avengers Infinity War",
@@ -25,24 +26,45 @@ export class MoviesService{
         )        
     ]
 
+    //sending out the current movies list
     getMovies(){
         return this.movies;
     }
-      
+     
+    //retrieving the ith movie at the array (array numbering starts from 0)  
     getMovie(id : number){
         return this.movies[id];
     }
     
+    //deleting a movie from the array (so the numbering for the ret changes accordinigly)
     deleteMovie(movie : Movie){
          this.movies.splice(this.movies.indexOf(movie),1);
     }
     
+    // adds a new movie at the end of the array
     addMovie(movie : Movie){
         this.movies.push(movie);
     }
     
+    //replaces a movie with a other one you give 
     editMovie(oldMovie: Movie ,newMovie: Movie){
         this.movies[this.movies.indexOf(oldMovie)] = newMovie;
     }
     
+ // for this to work i need to have write acces to my .json file and since I am not gonna eventually use the .json
+ // but will use firebase or a imdb api or similar i am not gonna bother   
+    // storeData(){
+    //     const body= JSON.stringify(this.movies)
+    //     console.log("storedata inside")
+    //     return this.http.put('./assets/movies.json', body )
+    //   }
+    
+    fetchData(){
+        return this.http.get('./assets/movies.json')
+            .subscribe( ( data : Movie[] ) =>{
+            this.movies = data;
+            this.moviesChanged.emit(this.movies);
+            }
+        )
+      }
 }

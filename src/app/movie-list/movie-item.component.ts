@@ -10,5 +10,5 @@ import {Movie} from '../shared/movie';
 export class MovieItemComponent {
     @Input() movie: Movie;
     @Input() movieId: number;
-    public  routerlink = "/display-movie/"+this.movieId ;
+    
 }
