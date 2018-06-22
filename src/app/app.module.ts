@@ -16,7 +16,7 @@ import { MoviesService } from './shared/movies.service';
     AppComponent,
     MovieListComponent,
     MovieItemComponent,
-    MovieDisplayComponent
+    MovieDisplayComponent,
   ],
 
   imports: [

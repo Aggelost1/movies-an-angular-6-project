@@ -1,11 +1,20 @@
 <a [routerLink]="['/display-movie',movieId]" class="list-group-item clearfix" routerLinkActive="active">
-<div class="pull-left">
-    <h4 class="list-group-item-heading">{{movie.title}}</h4>
-    <p class="list-group-item-text">{{movie.description}}</p>
-  </div>
-  <span class="pull-right">
-      <img class="img-responsive"
-           src="{{movie.posterUrl}}"
-           style="max-height: 50px;"/>
-  </span>
+    <span class="pull-left">
+        <div class="image">
+            <img class="img-responsive" src="{{movie.posterUrl}}" style="max-height: 88px;" />
+        </div>
+    </span>
+
+    <div class="pull-left">
+        <div class="text">
+            <h4 class="list-group-item-heading">{{movie.title}}</h4>
+        </div>
+        <div class="text">
+            <p class="list-group-item-text">{{movie.description}}</p>
+        </div>
+    </div>
 </a>
+<div class="row">
+        <div class="col-xs-12">
+          <a class="btn btn-danger" (click)="onDelete( this.movie )"  >delete Movie</a>
+</div>

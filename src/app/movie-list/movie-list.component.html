@@ -1,7 +1,13 @@
-  <div >
-    <div >
-      <ul>
-        <movie-item *ngFor="let movie of movies; let i=index " [movie]="movie" [movieId]="i"  ></movie-item>
-      </ul>
+<div class="row">
+    <div class="col-xs-12">
+      <a class="btn btn-success" [routerLink]="['/']" >Add Movie</a>
     </div>
-  </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-8">
+        <ul class="list-group">
+            <movie-item *ngFor="let movie of movies; let i=index " [movie]="movie" [movieId]="i"  ></movie-item>
+        </ul>
+    </div>
+</div>
