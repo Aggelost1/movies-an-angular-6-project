@@ -18,13 +18,12 @@ export class MovieListComponent implements OnInit, OnDestroy {
 
     constructor(private movieService: MoviesService){}
 
-// initializing my movies array from the movie service
-    ngOnInit(){
+// initializing my movies array from the movie service and checking for changes so it would be updated
+    ngOnInit(){      
         this.movies = this.movieService.getMovies();
         this.subscription = this.movieService.moviesChanged.subscribe(
             (movies: Movie[]) => this.movies =movies
-        )
-        this.movieService.fetchData();
+        )       
     }
    
 //unsubscribing on destraction to avoid memory leaks

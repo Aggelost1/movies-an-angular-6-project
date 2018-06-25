@@ -14,7 +14,7 @@
         </div>
     </div>
 </a>
-<div class="row">
-        <div class="col-xs-12">
-          <a class="btn btn-danger" (click)="onDelete( this.movie )"  >delete Movie</a>
+<div class="buttons">
+    <a class="btn btn-danger" (click)="onDelete( this.movie )"  >Delete Movie</a>
+    <a class="btn btn-primary" [routerLink]="['/edit-movie',movieId]" routerLinkActive="active" >Edit Movie</a>
 </div>

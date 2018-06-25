@@ -17,4 +17,5 @@ export class MovieItemComponent {
     this.movieService.deleteMovie(this.movie);
   }
     
+  
 }

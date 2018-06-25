@@ -1,8 +1,11 @@
-<h1>hello from the movie-display</h1>
+
 <div>
     <img src="{{movie?.posterUrl}}" alt="" class="img-responsive">
 </div>
-
+<div class="pull-right">
+        <a class="btn btn-primary"  [routerLink]="['/display-movie',movieIndexMinus]">Previous Movie</a>
+        <a class="btn btn-primary"  [routerLink]="['/display-movie',movieIndexPlus]">Next Movie</a>       
+</div>
 <div class="pull-left">
         <div class="text">
             <h3 class="list-group-item-heading">{{movie.title}}</h3>
@@ -16,4 +19,6 @@
             <h4>Actors:</h4>
             <ul *ngFor="let actor of movie.actors; let i=index " class="list-group-item-text">{{actor}}</ul>                
         </div>
+        
 </div>
+

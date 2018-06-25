@@ -15,14 +15,19 @@ import {MoviesService} from '../shared/movies.service';
 export class MovieDisplayComponent {
     movie : Movie;
     private movieIndex : number;
+    public movieIndexPlus: number;
+    public movieIndexMinus: number;
+
     private subscription : Subscription;
     constructor(private moviesService: MoviesService, private router: Router, private activatedroute: ActivatedRoute  ){}
    
     ngOnInit(){
      this.subscription = this.activatedroute.params.subscribe(
       (params:any) => {
-        this.movieIndex = params['id'];
-        this.movie = this.moviesService.getMovie(this.movieIndex);
+        this.movieIndex = params['id'];        
+        this.movie = this.moviesService.getMovie(this.movieIndex);        
+        this.movieIndexPlus = parseInt(params['id'])+1;
+        this.movieIndexMinus = parseInt(params['id'])-1;
       }
      );     
     }
