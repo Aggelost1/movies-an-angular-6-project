@@ -19,24 +19,30 @@ export class MovieEditComponent implements OnInit ,OnDestroy {
  private movieForm : FormGroup;
  private subscription :Subscription;
  private movie : Movie;
- private movieIndex: number ;
+ private movieIndex: string ;
  private isNew=true;
 
  constructor(private activatedroute: ActivatedRoute, private router:Router, private moviesService : MoviesService, private formBuilder:FormBuilder){}
 
  ngOnInit(){
-   
+    this.setEmptyMovieForm();
    this.subscription = this.activatedroute.params.subscribe(
    (params:any) => {
      if(params.hasOwnProperty('id')){
-     this.movieIndex = +params['id'];
-     this.isNew =false;
-     this.movie = this.moviesService.getMovie(this.movieIndex);
+        this.movieIndex = params['id'];
+        this.isNew =false;
+        this.moviesService.getMovie(this.movieIndex).subscribe(
+            (movie) => {
+                this.movie=movie
+                this.InitForm();
+            } 
+        )   
      }else{
        this.isNew= true;
        this.movie = null;
+       this.InitForm(); 
        }
-      this.InitForm(); 
+      
      }
    );  
  }
@@ -47,7 +53,7 @@ export class MovieEditComponent implements OnInit ,OnDestroy {
        this.moviesService.addMovie(newMovie);
        console.log("added new movie");
      }else{
-       this.moviesService.editMovie(this.movie ,newMovie);
+       this.moviesService.editMovie(this.movieIndex ,newMovie);
        console.log("edited a movie");
      }
      this.navigateBack();
@@ -85,15 +91,14 @@ export class MovieEditComponent implements OnInit ,OnDestroy {
     const movieActors: FormArray = new FormArray([]);
 
     if (!this.isNew) {
-       movieTitle = this.movie.title;
-      moviePosterUrl = this.movie.posterUrl;
-      movieContent = this.movie.description;
+        movieTitle = this.movie.title;
+        moviePosterUrl = this.movie.posterUrl;
+        movieContent = this.movie.description;
      if (this.movie.hasOwnProperty('actors')){
         for (let i=0; i<this.movie.actors.length; i++) {
           movieActors.push(
             new FormGroup({
-             name: new FormControl(this.movie.actors[i])
-              
+             name: new FormControl(this.movie.actors[i].name)              
            })
           );
         }
@@ -109,7 +114,18 @@ export class MovieEditComponent implements OnInit ,OnDestroy {
     
   }
       
-  
+  private setEmptyMovieForm() {
+    const movieName = '';
+    const movieImageUrl = '';
+    const movieContent = '';
+    const movieActors: FormArray = new FormArray([]);
+    this.movieForm = this.formBuilder.group({
+      title: [movieName, Validators.required],
+      posterUrl: [movieImageUrl, Validators.required],
+      description: [movieContent, Validators.required],
+      actors: movieActors
+    });
+  }
 
 
 }

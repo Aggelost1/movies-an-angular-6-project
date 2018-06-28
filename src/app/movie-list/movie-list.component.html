@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-xs-8">
         <ul class="list-group">
-            <movie-item *ngFor="let movie of movies; let i=index " [movie]="movie" [movieId]="i"  ></movie-item>
+            <movie-item *ngFor="let movie of movies; let i=index " [movie]="movie" [movieId]="movie.id"  ></movie-item>
         </ul>
     </div>
 </div>

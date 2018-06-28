@@ -9,12 +9,12 @@ import {MoviesService} from '../shared/movies.service';
 })
 export class MovieItemComponent {
   @Input() movie: Movie;
-  @Input() movieId: number;
+  @Input() movieId: string;
 
   constructor(private movieService: MoviesService){}
 
   onDelete(){
-    this.movieService.deleteMovie(this.movie);
+    this.movieService.deleteMovie(this.movieId);
   }
     
   

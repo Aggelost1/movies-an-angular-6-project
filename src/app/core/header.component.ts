@@ -28,9 +28,9 @@ export class HeaderComponent   {
     //     )
     // }
 
-    onFetch() {
-        return this.moviesService.fetchData()
-    }
+    // onFetch() {
+    //     return this.moviesService.fetchData()
+    // }
 
    
     // onLogout() {

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 
 import {Movie} from '../shared/movie';
 import {MoviesService} from '../shared/movies.service';
@@ -11,7 +11,7 @@ import {MoviesService} from '../shared/movies.service';
 })
 export class MovieListComponent implements OnInit, OnDestroy {
     
-    movies : Movie[] = [];
+    movies : Movie[];
     private subscription : Subscription;
 
     
@@ -20,10 +20,11 @@ export class MovieListComponent implements OnInit, OnDestroy {
 
 // initializing my movies array from the movie service and checking for changes so it would be updated
     ngOnInit(){      
-        this.movies = this.movieService.getMovies();
-        this.subscription = this.movieService.moviesChanged.subscribe(
-            (movies: Movie[]) => this.movies =movies
-        )       
+        this.subscription = this.movieService.getMovies().subscribe(
+            (movies) => this.movies = movies
+        )
+        
+       
     }
    
 //unsubscribing on destraction to avoid memory leaks
